@@ -1,0 +1,47 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus"
+        },
+        "networkInterfaceName": {
+            "value": "acg-vm420"
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/71-945cc879-working-with-azure-key-vault-jhb/providers/Microsoft.Network/virtualNetworks/vnet-ezjyu"
+        },
+        "publicIpAddressId": {
+            "value": "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/71-945cc879-working-with-azure-key-vault-jhb/providers/Microsoft.Network/publicIPAddresses/pip-ezjyu"
+        },
+        "virtualMachineName": {
+            "value": "acg-vm"
+        },
+        "virtualMachineComputerName": {
+            "value": "acg-vm"
+        },
+        "virtualMachineRG": {
+            "value": "71-945cc879-working-with-azure-key-vault-jhb"
+        },
+        "osDiskType": {
+            "value": "Standard_LRS"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_B1ms"
+        },
+        "adminUsername": {
+            "value": "azureuser"
+        },
+        "adminPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/964df7ca-3ba4-48b6-a695-1ed9db5723f8/resourceGroups/71-945cc879-working-with-azure-key-vault-jhb/providers/Microsoft.KeyVault/vaults/acgkeyvault-ezjyu"
+                },
+                "secretName": "acg-pass"
+            }
+        }
+    }
+}
