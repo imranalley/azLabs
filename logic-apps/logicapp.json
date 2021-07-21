@@ -1,0 +1,176 @@
+{
+    "properties": {
+        "provisioningState": "Succeeded",
+        "createdTime": "2021-07-21T12:40:23.4644748Z",
+        "changedTime": "2021-07-21T19:14:36.98726Z",
+        "state": "Enabled",
+        "version": "08585747120087264452",
+        "accessEndpoint": "https://prod-102.westus.logic.azure.com:443/workflows/0cbe0df11d5e4d88a16ef9169c15261b",
+        "definition": {
+            "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {
+                "$connections": {
+                    "defaultValue": {},
+                    "type": "Object"
+                }
+            },
+            "triggers": {
+                "manual": {
+                    "type": "Request",
+                    "kind": "Http",
+                    "inputs": {
+                        "method": "GET",
+                        "relativePath": "/{action}/{ticketid}/{ticketdata}",
+                        "schema": {}
+                    }
+                }
+            },
+            "actions": {
+                "Condition": {
+                    "actions": {
+                        "Create_blob_(V2)": {
+                            "runAfter": {},
+                            "type": "ApiConnection",
+                            "inputs": {
+                                "body": "@triggerOutputs()['relativePathParameters']['ticketdata']",
+                                "headers": {
+                                    "ReadFileMetadataFromServer": true
+                                },
+                                "host": {
+                                    "connection": {
+                                        "name": "@parameters('$connections')['azureblob']['connectionId']"
+                                    }
+                                },
+                                "method": "post",
+                                "path": "/v2/datasets/@{encodeURIComponent(encodeURIComponent('labstore4nntljbgizmoe'))}/files",
+                                "queries": {
+                                    "folderPath": "/container1",
+                                    "name": "@{triggerOutputs()['relativePathParameters']['ticketid']}.txt",
+                                    "queryParametersSingleEncoded": true
+                                }
+                            },
+                            "runtimeConfiguration": {
+                                "contentTransfer": {
+                                    "transferMode": "Chunked"
+                                }
+                            }
+                        }
+                    },
+                    "runAfter": {},
+                    "expression": {
+                        "and": [
+                            {
+                                "equals": [
+                                    "@triggerOutputs()['relativePathParameters']['action']",
+                                    "create"
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "If"
+                }
+            },
+            "outputs": {}
+        },
+        "parameters": {
+            "$connections": {
+                "value": {
+                    "azureblob": {
+                        "connectionId": "/subscriptions/4cedc5dd-e3ad-468d-bf66-32e31bdb9148/resourceGroups/515-60cac0c3-configure-a-logic-app-to-create-blobs/providers/Microsoft.Web/connections/azureblob-1",
+                        "connectionName": "azureblob-1",
+                        "id": "/subscriptions/4cedc5dd-e3ad-468d-bf66-32e31bdb9148/providers/Microsoft.Web/locations/westus/managedApis/azureblob"
+                    }
+                }
+            }
+        },
+        "endpointsConfiguration": {
+            "workflow": {
+                "outgoingIpAddresses": [
+                    {
+                        "address": "52.160.92.112"
+                    },
+                    {
+                        "address": "40.118.244.241"
+                    },
+                    {
+                        "address": "40.118.241.243"
+                    },
+                    {
+                        "address": "157.56.162.53"
+                    },
+                    {
+                        "address": "157.56.167.147"
+                    },
+                    {
+                        "address": "104.42.49.145"
+                    },
+                    {
+                        "address": "40.83.164.80"
+                    },
+                    {
+                        "address": "104.42.38.32"
+                    },
+                    {
+                        "address": "13.86.223.0"
+                    },
+                    {
+                        "address": "13.86.223.1"
+                    },
+                    {
+                        "address": "13.86.223.2"
+                    },
+                    {
+                        "address": "13.86.223.3"
+                    },
+                    {
+                        "address": "13.86.223.4"
+                    },
+                    {
+                        "address": "13.86.223.5"
+                    }
+                ],
+                "accessEndpointIpAddresses": [
+                    {
+                        "address": "52.160.90.237"
+                    },
+                    {
+                        "address": "138.91.188.137"
+                    },
+                    {
+                        "address": "13.91.252.184"
+                    },
+                    {
+                        "address": "157.56.160.212 "
+                    }
+                ]
+            },
+            "connector": {
+                "outgoingIpAddresses": [
+                    {
+                        "address": "40.112.243.160/28"
+                    },
+                    {
+                        "address": "104.40.51.248"
+                    },
+                    {
+                        "address": "104.42.122.49"
+                    },
+                    {
+                        "address": "40.112.195.87"
+                    },
+                    {
+                        "address": "13.93.148.62"
+                    }
+                ]
+            }
+        }
+    },
+    "id": "/subscriptions/4cedc5dd-e3ad-468d-bf66-32e31bdb9148/resourceGroups/515-60cac0c3-configure-a-logic-app-to-create-blobs/providers/Microsoft.Logic/workflows/lablogicapp4nntljbgizmoe",
+    "name": "lablogicapp4nntljbgizmoe",
+    "type": "Microsoft.Logic/workflows",
+    "location": "westus",
+    "tags": {
+        "displayName": "LogicApp"
+    }
+}
